@@ -6,7 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.config import settings
 from src.routers import all_routers
 
-app = FastAPI()
+app = FastAPI(
+    root_path=settings.PATH_PREFIX,
+)
 # Set all CORS enabled origins
 if settings.BACKEND_CORS_ORIGINS:
     app.add_middleware(
@@ -16,7 +18,7 @@ if settings.BACKEND_CORS_ORIGINS:
         ],
         allow_credentials=True,
         allow_methods=["*"],
-        allow_headers=["Origin", "Cookie"],
+        allow_headers=["*"],
     )
 
 for router in all_routers:

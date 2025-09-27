@@ -123,6 +123,7 @@ class Settings(BaseSettings):
     )
     MODEL: ModelSettings
     MCP_SERVER: MCPServerSettings
+    PATH_PREFIX: str = "/api"
 
     BACKEND_CORS_ORIGINS: Annotated[
         list[AnyUrl] | str,
