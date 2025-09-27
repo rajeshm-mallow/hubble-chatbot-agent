@@ -3,7 +3,6 @@ from typing import Any
 from src.agent.agent_factory import MCPClientFactory, OrderManagementAgentFactory
 from src.config import settings
 from src.context.request_context import RequestContext
-from src.models.pydantic import ChatRequest
 
 
 class OrderManagementAgentService:
@@ -20,7 +19,8 @@ class OrderManagementAgentService:
 
     async def process_chat_request(
         self,
-        request: ChatRequest,
+        session_uuid: str,
+        query: str,
         context: RequestContext,
         authorization_token: str = "",
     ) -> dict[str, Any]:
@@ -40,12 +40,12 @@ class OrderManagementAgentService:
             tools = client.list_tools_sync()
 
             agent = await self.agent_factory.create_agent(
-                session_id=str(request.session_id),
+                session_id=session_uuid,
                 tools=tools,
                 context=context,
                 authorization_token=authorization_token,
             )
 
-            response = agent(request.query)
+            response = agent(query)
 
             return response
