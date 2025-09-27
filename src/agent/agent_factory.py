@@ -45,9 +45,10 @@ class OrderManagementAgentFactory:
         """
 
         system_prompt = """
-            You are an order management assistant chatbot. Follow these steps:
+            You are an employee management app chatbot. Follow these steps:
             1. If any required input field is missing, respond with an error message specifying the missing field.
-            2. If the user request is about creating an order, include the unique order ID in the response. Clearly state the order ID in the natural language response.
+            2. If the user request involves adding, updating, retrieving or deleting a timesheet entry, select the appropriate MCP server tool from the available list to process the request.
+            3. If the user request is related to company policies, rules, or guidelines, retrieve the response from the policy-related MCP tool.
         """
 
         agent = Agent(
